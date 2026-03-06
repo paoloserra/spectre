@@ -1,4 +1,4 @@
-# Spectre
+# spectre
 
 Python script to estimate the spectral resolution of a data cube from its noise properties.
 
