@@ -14,7 +14,7 @@ The script does the following:
 
 The output image looks something like this:
 
-![Image](example.png)
+![Image](example_lambda.png)
 
 
 ```
