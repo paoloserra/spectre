@@ -431,13 +431,13 @@ def main():
   if art_len > 0:
     if art_ord == 1:
       art_ord_lab = 'st'
-    if art_ord == 2:
+    elif art_ord == 2:
       art_ord_lab = 'nd'
-    if art_ord == 3:
+    elif art_ord == 3:
       art_ord_lab = 'rd'
     else:
       art_ord_lab = 'th'
-    print('# Estimating autocorrelation Z caused by artefacts with a {0:d}{1:s} order polynomial fit to <A_F> beyond scale {2:d}'.format(art_ord, art_ord_lab, art_len))
+    print('# Estimating autocorrelation Z caused by artefacts with a {0:d}{1:s} order polynomial fit to <A_F> beyond channel separation = {2:d}'.format(art_ord, art_ord_lab, art_len))
     art_coeffs = np.polyfit(spec_z[nr_chan//2+art_len:], spec_autocorr_mean[nr_chan//2+art_len:], art_ord, w=1./spec_autocorr_std[nr_chan//2+art_len:])[::-1]
     for oo in range(art_coeffs.shape[0]):
       art_autocorr[nr_chan//2:] += art_coeffs[oo] * spec_z[nr_chan//2:]**oo
