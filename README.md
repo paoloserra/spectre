@@ -1,6 +1,6 @@
 # spectre
 
-Python script to estimate the spectral resolution of a data cube from its noise properties (paper accepted on Astronomy & Computing).
+Python script to estimate the spectral resolution of a data cube from its noise properties using the method described in [Serra et al. (2026)](https://ui.adsabs.harvard.edu/abs/2026arXiv261017223S).
 
 It assumes that the data cube is the convolution of an initial data cube (whose channels are uncorrelated) with a spectral convolution kernel `K`.
 
