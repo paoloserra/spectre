@@ -511,7 +511,6 @@ def main():
   ii_area -= 1
   rec_area_std = np.median(np.abs(rec_area[-ii_area:] - np.median(rec_area[-ii_area:])))
   rec_area_med = np.median(rec_area[-ii_area:])
-  print('# Kernel area = integral(K/K_max) = {0:.2f} channels (best guess of asymptotic value = median of last {1:d} channels).'.format(rec_area_med, ii_area))
 
   # Additional variables for plotting
   spec_autocorr_p16  = np.nanpercentile(spec_autocorr_all, 16, axis=0)
@@ -591,7 +590,15 @@ def main():
     ax3.plot(spec_z, kernels[kk], c=kcolors[colind], marker='o', ls='', alpha=0.5, label='$K$({0:s})'.format(kk))
     colind += 1
   ax3.legend(fontsize=legend_font_size)
+  printcoeffs = '1.0000'
+  for jj in range(spec_z.shape[0]):
+    if spec_z[jj] > 0 and spec_z[jj] < min(nr_chan//2,3*max_nonzero_autocorr):
+      ax3.annotate('{0:.2f}'.format(rec_kernel[jj]), (spec_z[jj], rec_kernel[jj]), fontsize=9, ha='center', va='bottom')
+      printcoeffs += ', {0:.4f}'.format(rec_kernel[jj])
+  print('# Kernel coefficients (see plot)  = {0:s}'.format(printcoeffs))
+  print('# Kernel area = integral(K/K_max) = {0:.2f} channels (best guess of asymptotic value = median of last {1:d} channels).'.format(rec_area_med, ii_area))
   ax3.set_xlim(0, min(nr_chan//2,3*max_nonzero_autocorr))
+  ax3.set_ylim(-0.05, 1.05)
   ax3.set_xlabel('channel')
   ax3.set_ylabel('$K$')
 #   ax3.set_ylabel('$K/ K_\\mathrm{max}$')
